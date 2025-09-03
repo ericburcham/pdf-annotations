@@ -53,6 +53,9 @@ set_env.bat
 # Error screenshots (for debugging)
 error.png
 
+# Windows null files
+nul
+
 # Keep PDF files for the POC
 !*.pdf
 !assets/*.pdf

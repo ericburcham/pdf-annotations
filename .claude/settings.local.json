@@ -22,7 +22,8 @@
       "Bash(./gradlew:*)",
       "WebFetch(domain:www.nutrient.io)",
       "Bash(npm uninstall:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(emulator:*)"
     ],
     "deny": [],
     "ask": []
