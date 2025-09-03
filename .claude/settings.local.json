@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm start)",
+      "Bash(npm run android:*)",
+      "Bash(npx react-native:*)",
+      "Bash(powershell:*)",
+      "Bash(dir:*)",
+      "Bash(java:*)",
+      "Bash(set ANDROID_HOME=C:UsersjamesAppDataLocalAndroidSdk)",
+      "Bash(set JAVA_HOME=C:Program FilesJavajdk-17.0.2)",
+      "Bash(set PATH=C:Program FilesJavajdk-17.0.2bin)",
+      "Bash(C:UsersjamesAppDataLocalAndroidSdkplatform-tools)",
+      "Bash(C:UsersjamesAppDataLocalAndroidSdkemulator)",
+      "Bash(%PATH%)",
+      "Bash(cmd /c:*)",
+      "Bash(E:srcenterprise-productspdf-annotationsrun_android.bat)",
+      "Bash(taskkill:*)",
+      "Bash(npm install:*)",
+      "Bash(gradlew:*)",
+      "Bash(./gradlew:*)",
+      "WebFetch(domain:www.nutrient.io)",
+      "Bash(npm uninstall:*)",
+      "Bash(test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

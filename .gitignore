@@ -1,0 +1,58 @@
+# OSX
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*~
+
+# Node (for React Native project)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Android build files
+*.apk
+*.aab
+*.hprof
+.gradle/
+build/
+.cxx/
+
+# iOS build files
+*.ipa
+*.xcuserstate
+Pods/
+
+# React Native
+.metro-health-check*
+*.jsbundle
+
+# Environment files
+.env
+.env.local
+
+# Scripts created for setup
+setup_android_env.ps1
+setup_java.ps1
+set_env_permanent.ps1
+run_android.bat
+run_android.ps1
+set_env.bat
+
+# Error screenshots (for debugging)
+error.png
+
+# Keep PDF files for the POC
+!*.pdf
+!assets/*.pdf
