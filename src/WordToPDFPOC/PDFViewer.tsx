@@ -1,13 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import {
   View,
-  Button,
   StyleSheet,
-  Alert,
   Platform,
   Text,
   SafeAreaView,
-  ScrollView,
   NativeModules,
 } from 'react-native';
 import NutrientView from '@nutrient-sdk/react-native';
@@ -28,68 +25,11 @@ const PDFViewer = () => {
     ? '10-K.pdf' 
     : 'file:///android_asset/10-K.pdf';
 
-  const handleAddHighlight = () => {
-    if (pdfRef.current) {
-      // Add a highlight annotation programmatically
-      const annotation = {
-        type: 'highlight',
-        pageIndex: 0,
-        boundingBox: { left: 100, top: 100, width: 200, height: 50 },
-        color: '#FFFF00',
-        opacity: 0.5,
-      };
-      
-      pdfRef.current.addAnnotation(annotation);
-      Alert.alert('Success', 'Highlight annotation added to page 1');
-    }
-  };
-
-  const handleAddComment = () => {
-    if (pdfRef.current) {
-      // Add a text/comment annotation
-      const annotation = {
-        type: 'note',
-        pageIndex: 0,
-        boundingBox: { left: 300, top: 200, width: 32, height: 32 },
-        contents: 'This is an important section of the 10-K filing that requires further review.',
-        subject: 'Review Note',
-        color: '#FF0000',
-      };
-      
-      pdfRef.current.addAnnotation(annotation);
-      Alert.alert('Success', 'Comment annotation added to page 1');
-    }
-  };
-
-  const handleSaveAnnotations = async () => {
-    if (pdfRef.current) {
-      try {
-        const annotations = await pdfRef.current.getAllUnsavedAnnotations();
-        console.log('Unsaved annotations:', annotations);
-        await pdfRef.current.save();
-        Alert.alert('Success', 'Annotations saved successfully');
-      } catch (error) {
-        Alert.alert('Error', 'Failed to save annotations');
-        console.error(error);
-      }
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Enterprise Products 10-K Filing</Text>
         <Text style={styles.subtitle}>PDF Annotation Demo with Nutrient</Text>
-      </View>
-      
-      <View style={styles.buttonContainer}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <Button title="Add Highlight" onPress={handleAddHighlight} color="#4CAF50" />
-          <View style={styles.buttonSpacer} />
-          <Button title="Add Comment" onPress={handleAddComment} color="#2196F3" />
-          <View style={styles.buttonSpacer} />
-          <Button title="Save Annotations" onPress={handleSaveAnnotations} color="#FF9800" />
-        </ScrollView>
       </View>
 
       <View style={styles.pdfContainer}>
@@ -123,6 +63,8 @@ const PDFViewer = () => {
             showDocumentLabel: true,
             invertColors: false,
             showAnnotationMenuItems: true,
+            // Auto-save annotations
+            autosaveEnabled: true,
           }}
           fragmentTag="PDF1"
           style={styles.pdfView}
@@ -131,17 +73,19 @@ const PDFViewer = () => {
           }}
           onAnnotationTapped={(event: any) => {
             console.log('Annotation tapped:', event);
-            Alert.alert('Annotation Tapped', `Type: ${event.annotation.type}`);
           }}
           onDocumentLoaded={(event: any) => {
             console.log('Document loaded:', event);
+          }}
+          onDocumentSaved={(event: any) => {
+            console.log('Document saved:', event);
           }}
         />
       </View>
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>
-          Tap and hold to highlight text. Use toolbar for more annotation options.
+          Use the toolbar to highlight, add comments, and annotate. Changes are saved automatically.
         </Text>
       </View>
     </SafeAreaView>
@@ -168,16 +112,6 @@ const styles = StyleSheet.create({
     color: 'white',
     opacity: 0.9,
     marginTop: 4,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    padding: 10,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  buttonSpacer: {
-    width: 10,
   },
   pdfContainer: {
     flex: 1,
